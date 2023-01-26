@@ -2,11 +2,12 @@ import { utils, Wallet } from 'zksync-web3';
 import * as ethers from 'ethers';
 import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { Deployer } from '@matterlabs/hardhat-zksync-deploy';
+import {privateKey} from "../network_secrets/secrets.json";
 
 export default async function (hre: HardhatRuntimeEnvironment) {
   // The wallet that will deploy the token and the paymaster
   // It is assumed that this wallet already has sufficient funds on zkSync
-  const wallet = new Wallet('<WALLET_PRIVATE_KEY>');
+  const wallet = new Wallet(privateKey);
 
   // The wallet that will receive ERC20 tokens
   const emptyWallet = Wallet.createRandom();

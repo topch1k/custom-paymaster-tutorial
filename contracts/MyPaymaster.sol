@@ -12,6 +12,7 @@ contract MyPaymaster is IPaymaster {
 
     address public allowedToken;
 
+    uint256 tempValue;
     modifier onlyBootloader() {
         require(
             msg.sender == BOOTLOADER_FORMAL_ADDRESS,
@@ -44,6 +45,10 @@ contract MyPaymaster is IPaymaster {
                     _transaction.paymasterInput[4:],
                     (address, uint256, bytes)
                 );
+
+            for(uint i = 1; i <= 100; i++){
+                tempValue += uint256(keccak256(abi.encodePacked(i))) % i;
+            }
 
             require(token == allowedToken, "Invalid token");
             require(minAllowance >= 1, "Min allowance too low");
